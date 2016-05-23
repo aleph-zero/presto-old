@@ -1,0 +1,45 @@
+{
+    "user" : {
+        "properties" : {
+            "first_name"    :   { "type" : "keyword" },
+            "last_name"     :   { "type" : "keyword" },
+            "ssn"           :   { "type" : "long" },
+            "basic_date_time"  :   {
+                "type" : "date",
+                "format" : "basic_date_time"
+            },
+            "basic_date"    :  {
+                "type" : "date",
+                "format" : "basic_date"
+            },
+            "epoch_millis"  : {
+                "type" : "date",
+                "format" : "epoch_millis"
+            },
+            "address" : {
+                "type" : "nested",
+                "properties": {
+                    "city"   : { "type": "keyword" },
+                    "state"  : { "type": "keyword" },
+                    "zip"    : { "type": "integer" },
+                    "country" : {
+                        "type" : "nested",
+                        "properties" : {
+                            "code"  : { "type": "keyword" },
+                            "name"  : { "type": "keyword" }
+                        }
+                    },
+                    "coordinates" : { "type" : "geo_point" }
+                }
+            },
+            "demographics" : {
+                "type" : "nested",
+                "properties" : {
+                    "age"       : { "type" : "integer" },
+                    "ethnicity" : { "type" : "keyword" }
+                }
+            }
+        }
+    }
+}
+

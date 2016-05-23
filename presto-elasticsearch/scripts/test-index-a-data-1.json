@@ -1,0 +1,26 @@
+{
+    "first_name"    : "andrew",
+    "last_name"     : "selden",
+    "ssn"           : 123456789,
+    "basic_date"    : "19970102",
+    "epoch_millis"  : 1467434712802,
+    "address" : {
+        "city": "Mountain View",
+        "state": "California",
+        "zip": 94040,
+        "country": {
+            "code": "US",
+            "name": "America"
+        },
+        "coordinates" : {
+            "lat": 41.12,
+            "lon": -71.34
+        }
+    },
+    "demographics" : {
+        "age" : 30,
+        "ethnicity" : "white"
+    }
+}
+
+
