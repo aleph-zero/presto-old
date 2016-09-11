@@ -1,0 +1,10 @@
+{
+    "user" : {
+        "properties" : {
+            "first_name"    :   { "type" : "keyword" },
+            "last_name"     :   { "type" : "keyword" },
+            "ssn"           :   { "type" : "long" }
+        }
+    }
+}
+

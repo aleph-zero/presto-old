@@ -1,0 +1,38 @@
+{
+    "<TABLE_NAME>" : {
+        "properties" : {
+            "title" : {
+                "type" : "keyword"
+            },
+            "year" : {
+                "type" : "integer"
+            },
+            "info" : {
+                "type" : "nested",
+                "properties" : {
+                    "directors" : {
+                        "type" : "keyword"
+                    },
+                    "rating" : {
+                        "type" : "float"
+                    },
+                    "genres" : {
+                        "type" : "keyword"
+                    },
+                    "image_url"  : {
+                        "type" : "keyword"
+                    },
+                    "plot" : {
+                        "type": "text"
+                    },
+                    "running_time_secs" : {
+                        "type" : "integer"
+                    },
+                    "actors" : {
+                        "type" : "keyword"
+                    }
+                }
+            }
+        }
+    }
+}
