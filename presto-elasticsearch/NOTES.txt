@@ -1,0 +1,43 @@
+
+###
+# Possible Bugs
+###
+
+ * Are we using javax.inject.Inject everywhere? I think I saw some usages of com.google.inject.Inject.
+
+###
+# Improvements
+###
+
+ * Split logic needs:
+    - isRemotelyAccessible() true or false
+    - See: SimpleNodeSelector.computeAssignments()
+    - See: NodeScheduler.selectExactNodes()
+    - See: SourcePartitionedScheduler.schedule()
+
+ * Splits:
+    - Currently restricting each split's host list to a single host until I can dig down
+      and really understand the placement policy.
+
+ * Preference:
+    - How does preference _local, _primary interact with my split policy and Presto's placement
+      policy?
+
+ * Slice policy:
+    - How should it work when we are querying multiple indices, either through and alias or by
+      explicitly listing >1 index in the query?
+
+ * Try implementing table partitioning logic in ElasticsearchMetadata. See RaptorMetadata for an example.
+    - Also in getTableLayouts()
+
+###
+# Mailing List Notes
+###
+
+ * https://groups.google.com/forum/#!searchin/presto-users/node-scheduler.location-aware-scheduling-enabled|sort:relevance/presto-users/a5rx5Jw-Tuc/Fwl01SGx9AoJ
+   - Make the scheduler evenly distributes the work:
+        a) if you have, Presto on every data node, and your data is balanced, use hive.force-local-scheduling=true
+            in the catalog/hive.properties
+        b) if you don't have Presto on every data node, then you will want to
+            set node-scheduler.location-aware-scheduling-enabled in config.properties which will cause the
+            scheduler to ignore locality and maximize parallelism.

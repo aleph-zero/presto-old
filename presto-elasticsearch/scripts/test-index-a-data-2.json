@@ -1,0 +1,26 @@
+{
+    "first_name": [
+        "Bob",
+        "Robert"
+    ],
+    "last_name": "Van Horn",
+    "epoch_millis": [ 1437434712802, 1437434752802 ],
+    "address": [
+        {
+            "city": "Montreal",
+            "state": "Quebec",
+            "country": {
+                "code": "CA"
+            }
+        },
+        {
+            "city": "San Francisco",
+            "state": "California",
+            "country": {
+                "code": "US"
+            }
+        }
+    ],
+    "ssn" : [ 123456, 654321 ]
+}
+
