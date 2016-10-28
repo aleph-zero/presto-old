@@ -17,7 +17,6 @@ package io.bunnysoft.presto;
 
 import com.facebook.presto.spi.Plugin;
 import com.facebook.presto.spi.connector.ConnectorFactory;
-import com.facebook.presto.spi.connector.ConnectorFactoryContext;
 import com.facebook.presto.spi.type.ParametricType;
 import com.facebook.presto.spi.type.Type;
 
@@ -43,11 +42,9 @@ public class ElasticsearchPlugin implements Plugin
     }
 
     @Override
-    public Iterable<ConnectorFactory> getConnectorFactories(ConnectorFactoryContext context)
+    public Iterable<ConnectorFactory> getConnectorFactories()
     {
-        return ImmutableList.of(new ElasticsearchConnectorFactory(
-                name,
-                context.getTypeManager()));
+        return ImmutableList.of(new ElasticsearchConnectorFactory(name));
     }
 
     @Override

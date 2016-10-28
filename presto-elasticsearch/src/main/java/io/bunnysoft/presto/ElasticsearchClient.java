@@ -23,8 +23,10 @@ import io.airlift.log.Logger;
 
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
+
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 import java.io.Closeable;
 import java.net.InetAddress;
@@ -57,7 +59,7 @@ public class ElasticsearchClient implements Closeable
 
         logger.info("Establishing connection: [%s]", settings.toDelimitedString(' '));
 
-        client = TransportClient.builder().settings(settings).build();
+        client = new PreBuiltTransportClient(settings);
 
         for (String hostAddress : config.getClusterHostAddresses()) {
             HostAndPort hostAndPort = HostAndPort.fromString(hostAddress).withDefaultPort(9300);

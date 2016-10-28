@@ -46,8 +46,7 @@ public class TestUtil
                 Requests.clusterHealthRequest()
                         .timeout(TimeValue.timeValueSeconds(15))
                         .waitForGreenStatus()
-                        .waitForEvents(Priority.LANGUID)
-                        .waitForRelocatingShards(0)).actionGet();
+                        .waitForEvents(Priority.LANGUID)).actionGet();
 
         if (response.isTimedOut()) {
             throw new RuntimeException("Timed out waiting for cluster to go green");

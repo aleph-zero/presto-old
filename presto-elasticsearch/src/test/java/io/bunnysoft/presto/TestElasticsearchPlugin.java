@@ -20,7 +20,6 @@ import com.google.common.collect.ImmutableMap;
 import com.facebook.presto.spi.Plugin;
 import com.facebook.presto.spi.connector.ConnectorContext;
 import com.facebook.presto.spi.connector.ConnectorFactory;
-import com.facebook.presto.testing.TestingConnectorFactoryContext;
 
 import io.bunnysoft.presto.util.TestUtil;
 import org.testng.annotations.Test;
@@ -41,7 +40,7 @@ public class TestElasticsearchPlugin
     {
         ElasticsearchPlugin plugin = loadPlugin(ElasticsearchPlugin.class);
 
-        ConnectorFactory factory = getOnlyElement(plugin.getConnectorFactories(new TestingConnectorFactoryContext()));
+        ConnectorFactory factory = getOnlyElement(plugin.getConnectorFactories());
         assertInstanceOf(factory, ElasticsearchConnectorFactory.class);
 
         Map<String, String> config = ImmutableMap.<String, String>builder()
