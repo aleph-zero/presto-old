@@ -15,6 +15,7 @@
  */
 package io.bunnysoft.presto;
 
+import com.facebook.presto.spi.SystemTable;
 import com.facebook.presto.spi.connector.Connector;
 import com.facebook.presto.spi.connector.ConnectorMetadata;
 import com.facebook.presto.spi.connector.ConnectorPageSourceProvider;
@@ -26,6 +27,7 @@ import com.facebook.presto.spi.transaction.IsolationLevel;
 import javax.inject.Inject;
 
 import java.util.List;
+import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
 
@@ -38,23 +40,31 @@ public class ElasticsearchConnector implements Connector
     private final ElasticsearchPageSourceProvider pageSourceProvider;
     private final ElasticsearchSplitManager       splitManager;
     private final List<PropertyMetadata<?>>       sessionProperties;
+    private final Set<SystemTable>                systemTables;
 
     @Inject
     public ElasticsearchConnector(final ElasticsearchPageSourceProvider pageSourceProvider,
                                   final ElasticsearchMetadata metadata,
                                   final ElasticsearchSplitManager splitManager,
-                                  final ElasticsearchSessionProperties sessionProperties)
+                                  final ElasticsearchSessionProperties sessionProperties,
+                                  final Set<SystemTable> systemTables)
     {
         this.pageSourceProvider = requireNonNull(pageSourceProvider, "pageSourceProvider is null");
         this.metadata           = requireNonNull(metadata, "metadata is null");
         this.splitManager       = requireNonNull(splitManager, "splitManager is null");
         this.sessionProperties  = requireNonNull(sessionProperties, "sessionProperties is null").getSessionProperties();
+        this.systemTables       = requireNonNull(systemTables, "systemTables is null");
     }
 
     @Override
     public ConnectorTransactionHandle beginTransaction(IsolationLevel isolationLevel, boolean readOnly)
     {
         return new ElasticsearchTransactionHandle();
+    }
+
+    @Override
+    public Set<SystemTable> getSystemTables() {
+        return systemTables;
     }
 
     @Override
