@@ -15,13 +15,17 @@
  */
 package io.bunnysoft.presto;
 
+import com.facebook.presto.spi.SystemTable;
 import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.Provides;
 import com.google.inject.Scopes;
+import com.google.inject.multibindings.Multibinder;
+import io.bunnysoft.presto.system.ElasticsearchNodeSystemTable;
 
 import javax.inject.Singleton;
 
+import static com.google.inject.multibindings.Multibinder.newSetBinder;
 import static io.airlift.configuration.ConfigBinder.configBinder;
 import static java.util.Objects.requireNonNull;
 
@@ -47,6 +51,9 @@ public class ElasticsearchModule implements Module
         binder.bind(ElasticsearchMetadata.class).in(Scopes.SINGLETON);
         binder.bind(ElasticsearchSplitManager.class).in(Scopes.SINGLETON);
         binder.bind(ElasticsearchSessionProperties.class).in(Scopes.SINGLETON);
+
+        Multibinder<SystemTable> tables = newSetBinder(binder, SystemTable.class);
+        tables.addBinding().to(ElasticsearchNodeSystemTable.class).in(Scopes.SINGLETON);
 
         configBinder(binder).bindConfig(ElasticsearchConfig.class);
     }
